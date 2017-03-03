@@ -1,0 +1,25 @@
+{
+  "name": "wix-react-boilerplate",
+  "version": "1.0.0",
+  "description": "boilerplate for react projects using webpack 2 (based on https://brotzky.co/blog/code-splitting-react-router-webpack-2/)",
+  "main": "index.js",
+  "author": "Greg Wixted <gwixted@gmail.com> (but really it's https://brotzky.co/)",
+  "license": "MIT",
+  "scripts": {
+    "start": "node webpack/webpack-dev-server"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
+}
