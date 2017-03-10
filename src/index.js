@@ -1,7 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './App';
+
+import tdata from './tdata';
 
 render(
-  <h1>Welcome to wix-react-boilerplate with webpack 2</h1>,
+  <App data={tdata} />,
   document.getElementById('App')
 );
