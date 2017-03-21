@@ -38,6 +38,7 @@ class App extends React.Component {
 const Title = () => (
   <h2 className="title">Timer Tasks</h2>
 );
+
 // =================================================
 // TASK
 // =================================================
