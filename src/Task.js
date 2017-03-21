@@ -51,7 +51,6 @@ class Task extends React.Component {
         <TaskName name={this.props.name} />
         <TaskTime hours={this.props.hours} min={this.props.min} sec={this.props.sec} />
           <Buttons onTimerClick={this.handleTimer} gIcon={this.state.playPauseIcon} />
-          <div onClick={this.handleTimer}>click me</div>
       </li>
     )
   }
