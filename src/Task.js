@@ -1,9 +1,17 @@
 import React from 'react';
-
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import TaskName from './TaskName';
 import TaskTime from './TaskTime';
 import Buttons from './Buttons';
 
+var taskState = observable({
+  sec: 0,
+  ticking: false,
+  playPauseIcon: 'play'
+});
+
+@observer
 class Task extends React.Component {
   constructor(props){
     super(props);
@@ -17,7 +25,6 @@ class Task extends React.Component {
 
     // functions must be bound manually with ES6 classes
     // this.handleChange = this.handleChange.bind(this);
-    this.handleTimer = this.handleTimer.bind(this);
   }
 
   handleTimer() {
@@ -50,7 +57,7 @@ class Task extends React.Component {
       <li className="task row">
         <TaskName name={this.props.name} />
         <TaskTime hours={this.props.hours} min={this.props.min} sec={this.props.sec} />
-          <Buttons onTimerClick={this.handleTimer} gIcon={this.state.playPauseIcon} />
+          <Buttons onTimerClick={this.handleTimer.bind(this)} gIcon={this.state.playPauseIcon} />
       </li>
     )
   }
