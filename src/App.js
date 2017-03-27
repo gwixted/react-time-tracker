@@ -1,8 +1,10 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import shortid from 'shortid';
 import ReactTimeout from 'react-timeout';
 import Title from './Title';
 import Task from './Task';
+import stores from './stores';
 
 class App extends React.Component {
   constructor(props){

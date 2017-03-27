@@ -1,56 +1,67 @@
 import React from 'react';
-
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import TaskName from './TaskName';
 import TaskTime from './TaskTime';
-import Buttons from './Buttons';
+import Button from 'react-bootstrap/lib/Button';
 
+
+@observer
 class Task extends React.Component {
+
+
+  @observable sec = this.props.sec || 0;
+  @observable min = Math.floor(this.sec / 60);
+  @observable hours = Math.floor(this.min / 60);
+  @observable ticking = false;
+  @observable playPauseIcon = 'play';
+  @observable timer = () => {
+    if ( this.ticking === false ) {
+      this.ticking = true;
+      this.playPauseIcon = 'pause';
+      this.tick = setInterval(() => {
+        this.sec++
+        this.min = Math.floor(this.sec / 60)
+        this.hours = Math.floor(this.min / 60)
+      },1000);
+    } else {
+      this.ticking = false;
+      this.playPauseIcon = 'play';
+      clearInterval(this.tick);
+    }
+  }
+
   constructor(props){
     super(props);
 
-    // set initial state
-    this.state = {
-      sec: 0,
-      ticking: false,
-      playPauseIcon: 'play'
-    };
+    this.handleTimer = this.handleTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
 
     // functions must be bound manually with ES6 classes
     // this.handleChange = this.handleChange.bind(this);
-    this.handleTimer = this.handleTimer.bind(this);
   }
 
   handleTimer() {
-    let tick = 0;
-    if ( this.state.ticking === false ) {
-      this.setState({
-        ticking: true,
-        playPauseIcon: 'pause'
-      })
-      tick = setInterval(() => {
-        this.setState({
-          sec: this.state.sec += 1
-        }, () => {
-          console.log(this.state.sec);
-        });
-      }, 1000)
-    } else {
-      clearInterval(tick, () => {
-        this.setState({
-          ticking: false,
-          playPauseIcon: 'play'
-        }, () => {
-          console.log(this.state.sec);
-        });
-      });
-    }
+    this.timer();
   }
+
+  resetTimer() {
+    if ( this.ticking === true ) {
+      this.timer();
+    }
+    this.sec = 0;
+  }
+
   render () {
     return (
       <li className="task row">
         <TaskName name={this.props.name} />
-        <TaskTime hours={this.props.hours} min={this.props.min} sec={this.props.sec} />
-          <Buttons onTimerClick={this.handleTimer} gIcon={this.state.playPauseIcon} />
+          <TaskTime hours={this.hours} min={this.min} sec={this.sec}  />
+          <div className="buttons col-md-2">
+            <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer}></Button>
+            <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer}></Button>
+            <Button name="task-remove" bsSize="xsmall" bsStyle="danger" className="glyphicon glyphicon-remove"></Button>
+          </div>
       </li>
     )
   }
