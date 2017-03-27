@@ -21,6 +21,8 @@ class Task extends React.Component {
       this.playPauseIcon = 'pause';
       this.tick = setInterval(() => {
         this.sec++
+        this.min = Math.floor(this.sec / 60)
+        this.hours = Math.floor(this.min / 60)
       },1000);
     } else {
       this.ticking = false;
