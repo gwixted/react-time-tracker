@@ -1,23 +1,14 @@
 [
   {
-    "id":"1",
     "tname":"Timer task 01",
-    "time": {
-      "s":3601
-    }
+    "time": 3601
   },
   {
-    "id":"2",
     "tname":"Timer task 02",
-    "time": {
-      "s":889857
-    }
+    "time": 889857
   },
   {
-    "id":"3",
     "tname":"Timer task 03",
-    "time": {
-      "s":58
-    }
+    "time":58
   }
 ]

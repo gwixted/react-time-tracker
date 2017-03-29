@@ -60,8 +60,6 @@ class Task extends React.Component {
     if ( this.ticking === true ) {
       this.timer();
     }
-    this.hour = 0;
-    this.min = 0;
     this.sec = 0;
   }
 
