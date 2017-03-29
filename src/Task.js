@@ -11,8 +11,6 @@ var moment = require('moment');
 class Task extends React.Component {
 
   @observable sec = this.props.time || 0;
-  @observable min = Math.floor(this.sec / 60) % 60;
-  @observable hour = Math.floor((this.sec / 60) / 60);
   @observable ticking = false;
   @observable playPauseIcon = 'play';
   @observable pad = (num) => {
@@ -48,10 +46,6 @@ class Task extends React.Component {
     // this.handleChange = this.handleChange.bind(this);
   }
 
-  pad(str) {
-    return ('0'+str).slice(-2);
-  }
-
   handleTimer() {
     this.timer();
   }
@@ -64,13 +58,23 @@ class Task extends React.Component {
   }
 
   render () {
+    const liststyle = {
+      marginTop: 1,
+      padding: 10,
+      background: '#eee',
+      clear: 'both'
+    };
+    const buttonstyle = {
+      marginLeft: 5,
+      marginRight: 5
+    };
     return (
-      <li className="task row">
+      <li className="task row" style={liststyle}>
         <TaskName name={this.props.name} />
           <TaskTime time={this.hhmmss(this.sec)} />
           <div className="buttons col-md-2">
             <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer}></Button>
-            <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer}></Button>
+            <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer} style={buttonstyle}></Button>
             <Button name="task-remove" bsSize="xsmall" bsStyle="danger" className="glyphicon glyphicon-remove"></Button>
           </div>
       </li>

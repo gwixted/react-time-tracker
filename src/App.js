@@ -37,17 +37,16 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.tasks);
     return (
       <div className="taskContainer col-md-12">
         <Title />
-          <div className="addTaskForm col-md-12">
+          <div className="addTaskForm  col-md-12">
             <form onSubmit={this.addTask} className="row">
-              <input type="text" placeholder="enter task" ref={(a) => this._inputElement = a} className="col-md-3" />
+              <input type="text" placeholder="enter task name" ref={(a) => this._inputElement = a} className="col-md-3" />
               <Button type="submit" bsSize="xsmall" bsStyle="primary"><span className="glyphicon glyphicon-plus"></span> Add Task</Button>
             </form>
           </div>
-        <ul className="taskList list-unstyled">
+        <ul className="taskList list-unstyled col-md-8 offset-md-3">
           {
             this.state.tasks.map(item => {
               return (
