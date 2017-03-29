@@ -3,17 +3,13 @@
     "id":"1",
     "tname":"Timer task 01",
     "time": {
-      "h":1,
-      "m":33,
-      "s":null
+      "s":3601
     }
   },
   {
     "id":"2",
     "tname":"Timer task 02",
     "time": {
-      "h":2,
-      "m":43,
       "s":889842
     }
   },
@@ -21,8 +17,6 @@
     "id":"3",
     "tname":"Timer task 03",
     "time": {
-      "h":null,
-      "m":54,
       "s":58
     }
   }

@@ -21,13 +21,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="taskContainer">
+      <div className="taskContainer col-md-12">
         <Title />
         <ul className="taskList list-unstyled">
           {
             this.state.tasks.map(item => {
               return (
-                <Task name={item.tname} key={shortid.generate()} hours={item.time.h} min={item.time.m} sec={item.time.s} />
+                <Task name={item.tname} key={shortid.generate()} time={item.time.s} />
               )
             })
           }
