@@ -15,41 +15,32 @@ class Task extends React.Component {
   @observable hour = Math.floor((this.sec / 60) / 60);
   @observable ticking = false;
   @observable playPauseIcon = 'play';
-  @observable timer = (secs) => {
+  @observable pad = (num) => {
+    return ('0'+num).slice(-2);
+  };
+  @observable hhmmss = (secs) => {
+    var minutes = Math.floor(secs / 60);
+    secs = secs%60;
+    var hours = Math.floor(minutes/60)
+    minutes = minutes%60;
+    return this.pad(hours)+":"+this.pad(minutes)+":"+this.pad(secs);
+  };
+  @observable timer = () => {
     if ( this.ticking === false ) {
       this.ticking = true;
       this.playPauseIcon = 'pause';
       this.tick = setInterval(() => {
         this.sec++
-        // this.sec = this.sec % 60;
-        //this.hour = this.hour % 60;
-        function pad(num) {
-          return ('0'+num).slice(-2);
-        }
-        function hhmmss(secs) {
-          var minutes = Math.floor(secs / 60);
-          secs = secs%60;
-          var hours = Math.floor(minutes/60)
-          minutes = minutes%60;
-          return pad(hours)+":"+pad(minutes)+":"+pad(secs);
-        }
-        function mm(secs) {
-          var minutes = Math.floor(secs / 60);
-          minutes = minutes%60;
-          return pad(minutes);
-        }
-        console.log(hhmmss(this.sec));
       },1000);
     } else {
       this.ticking = false;
       this.playPauseIcon = 'play';
       clearInterval(this.tick);
     }
-  }
+  };
 
   constructor(props){
     super(props);
-
     this.handleTimer = this.handleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
 
@@ -78,7 +69,7 @@ class Task extends React.Component {
     return (
       <li className="task row">
         <TaskName name={this.props.name} />
-          <TaskTime time={this.sec} />
+          <TaskTime time={this.hhmmss(this.sec)} />
           <div className="buttons col-md-2">
             <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer}></Button>
             <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer}></Button>
