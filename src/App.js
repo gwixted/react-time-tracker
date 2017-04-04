@@ -1,19 +1,20 @@
 import React from 'react';
 import shortid from 'shortid';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 import Title from './Title';
 import AddTaskForm from './AddTaskForm';
 import Task from './Task';
 import stores from './stores';
 import Button from 'react-bootstrap/lib/Button';
 
+@observer
 class App extends React.Component {
+
+  @observable appState = this.props.data;
+
   constructor(props){
     super(props);
-
-    // set initial state
-    this.state = {
-      tasks: this.props.data
-    };
 
     this.addTask = this.addTask.bind(this);
 
@@ -23,14 +24,12 @@ class App extends React.Component {
 
   addTask(e) {
     if ( this._inputElement.value.length ) {
-      var taskArr = this.state.tasks;
+      var taskArr = this.appState;
       taskArr.push({
         tname: this._inputElement.value,
         time: 0
       });
-      this.setState({
-        tasks: taskArr
-      })
+      this.appState = taskArr;
       this._inputElement.value = '';
     }
     e.preventDefault();
@@ -48,7 +47,7 @@ class App extends React.Component {
           </div>
         <ul className="taskList list-unstyled col-md-8 offset-md-3">
           {
-            this.state.tasks.map(item => {
+            this.appState.map(item => {
               return (
                 <Task name={item.tname} key={shortid.generate()} time={item.time} />
               )
