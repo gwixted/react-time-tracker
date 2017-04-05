@@ -29,19 +29,21 @@ class AddTaskForm extends React.Component {
       this._inputElement.value = '';
     }
     localStorage.setItem('lsSet',this.taskArr);
-
     e.preventDefault();
   }
 
   render () {
-    const submitStyle = {
-      height: 26
+    const margin = {
+      marginBottom: 10
+    }
+    const inputStyle = {
+      height: 30
     };
     return (
-      <div className="addTaskForm col-md-12">
+      <div style={margin} className="addTaskForm col-md-12">
         <form onSubmit={this.addTask} className="row">
-          <input type="text" placeholder="enter task" ref={(a) => this._inputElement = a} className="col-md-3" />
-          <Button type="submit" bsSize="xsmall" bsStyle="primary" style={submitStyle}><span className="glyphicon glyphicon-plus"></span> Add Task</Button>
+          <input type="text" placeholder="enter task" ref={(a) => this._inputElement = a} style={inputStyle} className="col-md-3" />
+          <Button type="submit" bsSize="xsmall" bsStyle="primary" style={inputStyle}><span className="glyphicon glyphicon-plus"></span> Add Task</Button>
         </form>
       </div>
     )
