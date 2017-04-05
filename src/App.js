@@ -23,9 +23,6 @@ class App extends React.Component {
   }
 
   render() {
-    const submitStyle = {
-      height: 26
-    };
     return (
       <div className="taskContainer col-md-12">
         <Title />
