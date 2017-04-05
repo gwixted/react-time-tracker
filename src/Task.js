@@ -3,13 +3,15 @@ import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import TaskName from './TaskName';
 import TaskTime from './TaskTime';
+import App from './App';
 import Button from 'react-bootstrap/lib/Button';
 
-var moment = require('moment');
+const localStorage = require('mobx-localstorage');
 
 @observer
 class Task extends React.Component {
 
+  @observable taskArr = localStorage.getItem('lsSet');
   @observable sec = this.props.time || 0;
   @observable ticking = false;
   @observable playPauseIcon = 'play';
@@ -41,6 +43,7 @@ class Task extends React.Component {
     super(props);
     this.handleTimer = this.handleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
 
     // functions must be bound manually with ES6 classes
     // this.handleChange = this.handleChange.bind(this);
@@ -57,6 +60,11 @@ class Task extends React.Component {
     this.sec = 0;
   }
 
+  deleteTask() {
+    this.taskArr.splice(this.props.ind, 1);
+    localStorage.setItem('lsSet',this.taskArr);
+  }
+
   render () {
     const liststyle = {
       marginTop: 1,
@@ -71,12 +79,12 @@ class Task extends React.Component {
     return (
       <li className="task row" style={liststyle}>
         <TaskName name={this.props.name} />
-          <TaskTime time={this.hhmmss(this.sec)} />
-          <div className="buttons col-md-2">
-            <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer}></Button>
-            <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer} style={buttonstyle}></Button>
-            <Button name="task-remove" bsSize="xsmall" bsStyle="danger" className="glyphicon glyphicon-remove"></Button>
-          </div>
+        <TaskTime time={this.hhmmss(this.sec)} />
+        <div className="buttons col-md-2">
+          <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer}></Button>
+          <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer} style={buttonstyle}></Button>
+          <Button name="task-remove" bsSize="xsmall" bsStyle="danger" className="glyphicon glyphicon-remove" onClick={this.deleteTask}></Button>
+        </div>
       </li>
     )
   }

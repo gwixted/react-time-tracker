@@ -5,51 +5,36 @@ import { observer } from 'mobx-react';
 import Title from './Title';
 import AddTaskForm from './AddTaskForm';
 import Task from './Task';
-import stores from './stores';
 import Button from 'react-bootstrap/lib/Button';
+
+const localStorage = require('mobx-localstorage');
+
 
 @observer
 class App extends React.Component {
 
-  @observable appState = this.props.data;
+  @observable taskArr = this.props.data;
 
   constructor(props){
     super(props);
-
-    this.addTask = this.addTask.bind(this);
 
     // functions must be bound manually with ES6 classes
     // this.handleChange = this.handleChange.bind(this);
   }
 
-  addTask(e) {
-    if ( this._inputElement.value.length ) {
-      var taskArr = this.appState;
-      taskArr.push({
-        tname: this._inputElement.value,
-        time: 0
-      });
-      this.appState = taskArr;
-      this._inputElement.value = '';
-    }
-    e.preventDefault();
-  }
-
   render() {
+    const submitStyle = {
+      height: 26
+    };
     return (
       <div className="taskContainer col-md-12">
         <Title />
-          <div className="addTaskForm  col-md-12">
-            <form onSubmit={this.addTask} className="row">
-              <input type="text" placeholder="enter task name" ref={(a) => this._inputElement = a} className="col-md-3" />
-              <Button type="submit" bsSize="xsmall" bsStyle="primary"><span className="glyphicon glyphicon-plus"></span> Add Task</Button>
-            </form>
-          </div>
+        <AddTaskForm />
         <ul className="taskList list-unstyled col-md-8 offset-md-3">
           {
-            this.appState.map(item => {
+            this.taskArr.map((item, index) => {
               return (
-                <Task name={item.tname} key={shortid.generate()} time={item.time} />
+                <Task name={item.tname} ind={index} key={shortid.generate()} time={item.time} />
               )
             })
           }
