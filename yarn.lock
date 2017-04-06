@@ -2146,10 +2146,6 @@ mobx-react:
   dependencies:
     hoist-non-react-statics "^1.2.0"
 
-moment:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
-
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -2599,12 +2595,6 @@ react-router:
     invariant "^2.2.1"
     loose-envify "^1.2.0"
     warning "^3.0.0"
-
-react-timeout:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-timeout/-/react-timeout-1.0.0.tgz#100056d81bbea208cbbec6e55e4efc86a61a7df8"
-  dependencies:
-    object-assign "^4.0.1"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
