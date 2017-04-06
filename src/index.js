@@ -5,6 +5,6 @@ import App from './App';
 const localStorage = require('mobx-localstorage');
 
 render(
-  <App data={localStorage.getItem('lsSet')} />,
+  <App data={localStorage.getItem('lsSet') || []} />,
   document.getElementById('App')
 );

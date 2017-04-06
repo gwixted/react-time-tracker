@@ -41,6 +41,7 @@ class Task extends React.Component {
 
   constructor(props){
     super(props);
+    
     this.handleTimer = this.handleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
