@@ -6,6 +6,6 @@ import tdata from './tdata';
 const localStorage = require('mobx-localstorage');
 
 render(
-  <App data={localStorage.getItem('store') || []} />,
+  <App data={localStorage.getItem('lsSet') || []} />,
   document.getElementById('App')
 );

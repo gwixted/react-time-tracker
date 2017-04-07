@@ -11,7 +11,7 @@ const localStorage = require('mobx-localstorage');
 @observer
 class Task extends React.Component {
 
-  @observable taskArr = localStorage.getItem('store') || [];
+  @observable taskArr = localStorage.getItem('lsSet') || [];
   @observable sec = this.props.time || 0;
   @observable ticking = false;
   @observable playPauseIcon = 'play';
@@ -63,7 +63,7 @@ class Task extends React.Component {
 
   deleteTask() {
     this.taskArr.splice(this.props.ind, 1);
-    localStorage.setItem('store',this.taskArr);
+    localStorage.setItem('lsSet',this.taskArr);
   }
 
   render () {
