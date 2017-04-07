@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(localStorage.getItem('store'));
     return (
       <div className="taskContainer col-md-12">
         <Title />
