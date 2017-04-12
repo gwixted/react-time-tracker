@@ -8,7 +8,7 @@ const localStorage = require('mobx-localstorage');
 @observer
 class AddTaskForm extends React.Component {
 
-  @observable taskArr = localStorage.getItem('lsSet') || [];
+  @observable taskArr = localStorage.getItem('taskData') || [];
 
   constructor(props){
     super(props);
@@ -29,7 +29,7 @@ class AddTaskForm extends React.Component {
       this.taskArr = taskArr;
       this._inputElement.value = '';
     }
-    localStorage.setItem('lsSet',this.taskArr);
+    localStorage.setItem('taskData',this.taskArr);
     e.preventDefault();
   }
 
