@@ -13,7 +13,7 @@ class Task extends React.Component {
 
   @observable taskArr = localStorage.getItem('lsSet') || [];
   @observable sec = this.props.time || 0;
-  @observable ticking = false;
+  @observable ticking = this.props.ticking;
   @observable playPauseIcon = 'play';
   @observable pad = (num) => {
     return ('0'+num).slice(-2);
@@ -24,6 +24,10 @@ class Task extends React.Component {
     var hours = Math.floor(minutes/60)
     minutes = minutes%60;
     return this.pad(hours)+":"+this.pad(minutes)+":"+this.pad(secs);
+  };
+  @observable updateTime(secs) {
+    this.taskArr[this.props.ind].time = secs;
+    localStorage.setItem('lsSet',this.taskArr);
   };
   @observable timer = () => {
     if ( this.ticking === false ) {
@@ -52,6 +56,7 @@ class Task extends React.Component {
 
   handleTimer() {
     this.timer();
+    this.updateTime(this.sec);
   }
 
   resetTimer() {
@@ -59,6 +64,7 @@ class Task extends React.Component {
       this.timer();
     }
     this.sec = 0;
+    this.updateTime(this.sec)
   }
 
   deleteTask() {

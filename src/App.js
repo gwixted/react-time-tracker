@@ -5,7 +5,6 @@ import { observer } from 'mobx-react';
 import Title from './Title';
 import AddTaskForm from './AddTaskForm';
 import Task from './Task';
-import Button from 'react-bootstrap/lib/Button';
 
 const localStorage = require('mobx-localstorage');
 
@@ -23,7 +22,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(localStorage.getItem('store'));
     return (
       <div className="taskContainer col-md-12">
         <Title />
@@ -32,7 +30,7 @@ class App extends React.Component {
           {
             this.taskArr.map((item, index) => {
               return (
-                <Task name={item.tname} ind={index} key={shortid.generate()} time={item.time} />
+                <Task name={item.tname} ind={index} key={shortid.generate()} time={item.time} ticking={false} int={0} />
               )
             })
           }
