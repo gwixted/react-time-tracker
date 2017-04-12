@@ -64,8 +64,10 @@ class Task extends React.Component {
     if ( this.ticking === true ) {
       this.timer();
     }
-    this.sec = 0;
-    this.updateTime(this.sec)
+    if ( confirm('Are you sure you want to reset this task?') ) {
+      this.sec = 0;
+      this.updateTime(this.sec)
+    }
   }
 
   deleteTask() {

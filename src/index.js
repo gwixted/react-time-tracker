@@ -6,7 +6,7 @@ import tdata from './tdata';
 const localStorage = require('mobx-localstorage');
 
 if ( !localStorage.getItem('taskData') ) {
-  const lsdata = localStorage.setItem('taskData',[]);
+  localStorage.setItem('taskData',[]);
 }
 
 render(
