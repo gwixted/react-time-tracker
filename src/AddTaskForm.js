@@ -24,7 +24,8 @@ class AddTaskForm extends React.Component {
       var taskArr = this.taskArr;
       this.taskArr.push({
         tname: this._inputElement.value,
-        time: 0
+        time: 0,
+        interval: 0
       });
       this.taskArr = taskArr;
       this._inputElement.value = '';

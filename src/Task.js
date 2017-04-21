@@ -5,6 +5,7 @@ import TaskName from './TaskName';
 import TaskTime from './TaskTime';
 import App from './App';
 import Button from 'react-bootstrap/lib/Button';
+import update from 'immutability-helper';
 
 const localStorage = require('mobx-localstorage');
 
@@ -26,17 +27,27 @@ class Task extends React.Component {
     minutes = minutes%60;
     return this.pad(hours)+":"+this.pad(minutes)+":"+this.pad(secs);
   };
-  @observable updateTime(secs) {
+  // @observable updateTime(secs) {
+  //   this.taskArr = localStorage.getItem('taskData');
+  //   this.taskArr[this.props.ind].time = secs;
+  //   localStorage.setItem('taskData',this.taskArr);
+  // };
+  @observable updateTaskData(name, sec, int) {
     this.taskArr = localStorage.getItem('taskData');
-    this.taskArr[this.props.ind].time = secs;
+    this.taskArr = update(this.taskArr, {$splice: [[[this.props.ind],1, {
+      tname: name,
+      time: sec,
+      interval: int
+    }]]})
     localStorage.setItem('taskData',this.taskArr);
-  };
+  }
   @observable timer = () => {
     if ( this.ticking === false ) {
       this.ticking = true;
       this.playPauseIcon = 'pause';
       this.tick = setInterval(() => {
         this.sec++
+        this.updateTaskData(this.props.name, this.sec, this.tick);
       },1000);
     } else {
       this.ticking = false;
@@ -67,7 +78,7 @@ class Task extends React.Component {
     }
     if ( confirm('Are you sure you want to reset this task?') ) {
       this.sec = 0;
-      this.updateTime(this.sec)
+      this.updateTaskData(this.props.name, this.sec, this.tick);
     }
   }
 
