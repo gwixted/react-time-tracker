@@ -27,11 +27,6 @@ class Task extends React.Component {
     minutes = minutes%60;
     return this.pad(hours)+":"+this.pad(minutes)+":"+this.pad(secs);
   };
-  // @observable updateTime(secs) {
-  //   this.taskArr = localStorage.getItem('taskData');
-  //   this.taskArr[this.props.ind].time = secs;
-  //   localStorage.setItem('taskData',this.taskArr);
-  // };
   @observable updateTaskData(name, sec, int) {
     this.taskArr = localStorage.getItem('taskData');
     this.taskArr = update(this.taskArr, {$splice: [[[this.props.ind],1, {
