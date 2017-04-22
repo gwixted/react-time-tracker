@@ -8,15 +8,13 @@ const localStorage = require('mobx-localstorage');
 @observer
 class AddTaskForm extends React.Component {
 
-  @observable taskArr = localStorage.getItem('taskData') || [];
+  @observable taskArr = localStorage.getItem('taskData');
 
   constructor(props){
     super(props);
 
     this.addTask = this.addTask.bind(this);
 
-    // functions must be bound manually with ES6 classes
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   addTask(e) {

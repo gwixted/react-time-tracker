@@ -3,7 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = env => {
+
+  const ifProd = plugin =>  env.prod ? plugin : undefined;
+  const removeEmpty = array => array.filter(p => !!p);
+
   return {
+
     // entry tells webpack where to start looking
     entry: {
       app: path.join(__dirname, '../src/'),
@@ -34,7 +39,7 @@ module.exports = env => {
       ],
     },
 
-    plugins: [
+    plugins: removeEmpty([
       // used to split out our specified vendor script
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
@@ -51,6 +56,20 @@ module.exports = env => {
         filename: 'index.html',
         inject: 'body'
       }),
-    ],
+      // Only running DedupePlugin() and UglifyJsPlugin() in production
+      ifProd(new webpack.optimize.DedupePlugin()),
+      ifProd(new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          'screw_ie8': true,
+          'warnings': false,
+          'unused': true,
+          'dead_code': true,
+        },
+        output: {
+          comments: false,
+        },
+        sourceMap: false,
+      })),
+    ]),
   };
 };
