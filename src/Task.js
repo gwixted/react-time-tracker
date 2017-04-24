@@ -64,7 +64,7 @@ class Task extends React.Component {
 
   handleTimer() {
     this.timer();
-    this.updateTime(this.sec);
+    this.updateTaskData(this.props.name, this.sec, this.tick);
   }
 
   resetTimer() {
@@ -93,16 +93,16 @@ class Task extends React.Component {
     };
     const buttonstyle = {
       marginLeft: 5,
-      marginRight: 5
+      outline: 'none'
     };
     return (
       <li className="task row" style={liststyle}>
         <TaskName name={this.props.name} />
         <TaskTime time={this.hhmmss(this.sec)} />
         <div className="buttons col-md-2">
-          <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer}></Button>
+          <Button name="task-start-pause" bsSize="xsmall" bsStyle="success" className={`glyphicon glyphicon-${this.playPauseIcon}`} onClick={this.handleTimer} style={buttonstyle}></Button>
           <Button name="task-refresh" bsSize="xsmall" bsStyle="warning" onClick={this.resetTimer} className="glyphicon glyphicon-refresh" onClick={this.resetTimer} style={buttonstyle}></Button>
-          <Button name="task-remove" bsSize="xsmall" bsStyle="danger" className="glyphicon glyphicon-remove" onClick={this.deleteTask}></Button>
+          <Button name="task-remove" bsSize="xsmall" bsStyle="danger" className="glyphicon glyphicon-remove" onClick={this.deleteTask} style={buttonstyle}></Button>
         </div>
       </li>
     )

@@ -1,12 +1,14 @@
 import React from 'react';
+import { autorun } from 'mobx';
 import { render } from 'react-dom';
 import App from './App';
-import tdata from './tdata';
 
 const localStorage = require('mobx-localstorage');
 
 if ( !localStorage.getItem('taskData') ) {
-  localStorage.setItem('taskData',[]);
+  autorun(() => {
+    localStorage.setItem('taskData',[]);
+  });
 }
 
 render(
