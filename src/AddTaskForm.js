@@ -1,5 +1,5 @@
 import React from 'react';
-import { observable } from 'mobx';
+import { observable, autorun } from 'mobx';
 import { observer } from 'mobx-react';
 import Button from 'react-bootstrap/lib/Button';
 
@@ -19,16 +19,16 @@ class AddTaskForm extends React.Component {
 
   addTask(e) {
     if ( this._inputElement.value.length ) {
-      var taskArr = this.taskArr;
+      this.taskArr = localStorage.getItem('taskData');
       this.taskArr.push({
         tname: this._inputElement.value,
         time: 0,
         interval: 0
       });
-      this.taskArr = taskArr;
+      // this.taskArr = taskArr;
+      localStorage.setItem('taskData',this.taskArr);
       this._inputElement.value = '';
     }
-    localStorage.setItem('taskData',this.taskArr);
     e.preventDefault();
   }
 

@@ -33,7 +33,7 @@ class Task extends React.Component {
       tname: name,
       time: sec,
       interval: int
-    }]]})
+    }]]});
     localStorage.setItem('taskData',this.taskArr);
   }
   @observable timer = () => {
@@ -72,8 +72,9 @@ class Task extends React.Component {
       this.timer();
     }
     if ( confirm('Are you sure you want to reset this task?') ) {
+      this.taskArr[this.props.ind].time = 0;
       this.sec = 0;
-      this.updateTaskData(this.props.name, this.sec, this.tick);
+      localStorage.setItem('taskData',this.taskArr);
     }
   }
 
