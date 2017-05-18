@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = env => {
 
@@ -56,6 +57,9 @@ module.exports = env => {
         filename: 'index.html',
         inject: 'body'
       }),
+
+      new OpenBrowserPlugin({ url: 'http://localhost:1111' }),
+      
       // Only running DedupePlugin() and UglifyJsPlugin() in production
       ifProd(new webpack.optimize.DedupePlugin()),
       ifProd(new webpack.optimize.UglifyJsPlugin({
